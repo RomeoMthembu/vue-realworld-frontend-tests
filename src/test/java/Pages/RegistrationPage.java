@@ -30,6 +30,7 @@ public class RegistrationPage extends BaseClass {
             int index = RANDOM.nextInt(CHARACTERS.length());
             sb.append(CHARACTERS.charAt(index));
         }
+
         return sb.toString();
     }
 
