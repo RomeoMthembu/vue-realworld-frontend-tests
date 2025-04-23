@@ -1,21 +1,32 @@
 package StepDefinitions;
 
+import Pages.SettingsPage;
+import TestBase.BaseClass;
 import io.cucumber.java.en.*;
 
-public class SettingsSteps {
 
-    @Given("A User that has not registered")
-    public void a_user_that_has_not_registered() {
+public class SettingsSteps extends BaseClass {
+
+
+    SettingsPage settings;
+
+    @Given("An unregistered user launches Auth page \\(Settings)")
+    public void an_unregistered_user_launches_auth_page_settings() throws InterruptedException {
+
+        settings = new SettingsPage(webDriver);
+        settings.LaunchSettingsPage();
+    }
+
+    @When("User updates user details in settings page")
+    public void user_updates_user_details_in_settings_page()throws InterruptedException {
+
+        settings.EnterDetailstoUpdate();
 
     }
 
-    @When("User launches Auth page \\( Settings)")
-    public void user_launches_auth_page_settings() {
+    @Then("The user must not be update details without being registered")
+    public void the_user_must_not_be_update_details_without_being_registered() throws InterruptedException {
 
-    }
-
-    @Then("The user must not be able to access the auth page without being authenticated.")
-    public void the_user_must_not_be_able_to_access_the_auth_page_without_being_authenticated() {
-
+            settings.AssertNoUpdateWasMade();
     }
 }
